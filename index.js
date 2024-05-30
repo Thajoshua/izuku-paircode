@@ -131,25 +131,25 @@ async function startnigg(phone) {
 
           const output = await pastebin.createPasteFromFile(
             `${sessionFolder}/creds.json`,
-            'Guru Bhai',
+            'Josh',
             null,
             1,
             'N'
           )
-          const sessi = 'GuruBot~' + output.split('https://pastebin.com/')[1]
+          const sessi = 'Testnet~' + output.split('https://pastebin.com/')[1]
           console.log(sessi)
           await delay(2000)
-          let guru = await negga.sendMessage(negga.user.id, { text: sessi })
+          let josh = await negga.sendMessage(negga.user.id, { text: sessi })
           await delay(2000)
           await negga.sendMessage(
             negga.user.id,
             {
-              text: 'Hello there! 👋 \n\nDo not share your session id with anyone.\n\nPut the above in SESSION_ID var\n\nThanks for using GURU-BOT\n\n join support group:- https://chat.whatsapp.com/JY4R2D22pbLIKBMQWyBaLg \n',
+              text: 'Hello there! 👋 \n\n Its Josh',
             },
-            { quoted: guru }
+            { quoted: josh }
           )
 
-          console.log('Connected to WhatsApp Servers')
+          console.log('Connected to WhatsApp')
 
           try {
             deleteSessionFolder()
@@ -202,5 +202,5 @@ async function startnigg(phone) {
 }
 
 app.listen(PORT, () => {
-  console.log(`API Running on PORT:${PORT}`)
+  console.log(`Running on PORT:${PORT}`)
 })
