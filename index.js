@@ -27,18 +27,18 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-let sessionFolder = `./auth`;
+const sessionFolder = path.join(__dirname, 'auth');
 
-if (!fs.existsSync(sessionFolder)) {
-  try {
+try {
+  if (!fs.existsSync(sessionFolder)) {
     fs.mkdirSync(sessionFolder);
     console.log(`Created the "${sessionFolder}" folder.`);
-  } catch (err) {
-    console.error(`Error creating the "${sessionFolder}" folder:`, err);
-    // Handle the error or exit the process
+  } else {
+    console.log(`The "${sessionFolder}" folder already exists.`);
   }
-} else {
-  console.log(`The "${sessionFolder}" folder already exists.`);
+} catch (err) {
+  console.error(`Error creating the "${sessionFolder}" folder:`, err);
+  // Handle the error or exit the process
 }
 
 let clearState = () => {
@@ -94,7 +94,6 @@ async function startnigg(phone) {
         browser: ['Ubuntu', 'Chrome', '20.0.04'],
         auth: state,
       });
-      
 
       if (!negga.authState.creds.registered) {
         let phoneNumber = phone ? phone.replace(/[^0-9]/g, '') : '';
