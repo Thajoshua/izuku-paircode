@@ -27,18 +27,14 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const sessionFolder = './auth'; // This creates the "auth" folder in your application's working directory
 
-try {
-  if (!fs.existsSync(sessionFolder)) {
-    fs.mkdirSync(sessionFolder);
-    console.log(`Created the "${sessionFolder}" folder.`);
-  } else {
-    console.log(`The "${sessionFolder}" folder already exists.`);
+if (fs.existsSync(sessionFolder)) {
+  try {
+    fs.rmdirSync(sessionFolder, { recursive: true });
+    console.log('Deleted the "SESSION" folder.');
+  } catch (err) {
+    console.error('Error deleting the "SESSION" folder:', err);
   }
-} catch (err) {
-  console.error(`Error creating the "${sessionFolder}" folder:`, err);
-  // Handle the error or exit the process
 }
 
 let clearState = () => {
