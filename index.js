@@ -27,7 +27,7 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const sessionFolder = path.join(__dirname, 'auth');
+const sessionFolder = './auth'; // This creates the "auth" folder in your application's working directory
 
 try {
   if (!fs.existsSync(sessionFolder)) {
