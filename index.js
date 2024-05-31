@@ -27,15 +27,21 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-let sessionFolder = '/tmp/auth'
-if (fs.existsSync(sessionFolder)) {
+let sessionFolder = `./auth`
+
+// Check if the directory exists
+if (!fs.existsSync(sessionFolder)) {
+  // If it doesn't exist, create it
   try {
-    fs.rmdirSync(sessionFolder, { recursive: true });
-    console.log('Deleted the "SESSION" folder.');
+    fs.mkdirSync(sessionFolder);
+    console.log(`Created the "${sessionFolder}" folder.`);
   } catch (err) {
-    console.error('Error deleting the "SESSION" folder:', err);
+    console.error(`Error creating the "${sessionFolder}" folder:`, err);
+    // Handle the error or exit the process
   }
-}
+} else {
+  console.log(`The "${sessionFolder}" folder already exists.`);
+} 
 
 let clearState = () => {
   fs.rmdirSync(sessionFolder, { recursive: true });
