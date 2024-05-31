@@ -7,10 +7,11 @@ import Baileys, {
 import cors from 'cors';
 import express from 'express';
 import fs from 'fs';
-import pino from 'pino'
+import pino from 'pino';
 import PastebinAPI from 'pastebin-js';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+
 let pastebin = new PastebinAPI('EMWTMkQAVfJa9kM-MRUrxd5Oku1U7pgL');
 
 const app = express();
@@ -24,10 +25,11 @@ app.use((req, res, next) => {
 
 app.use(cors());
 let PORT = process.env.PORT || 8000;
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-let sessionFolder = `./auth`
+// Use /tmp directory for session folder
+let sessionFolder = `/tmp/auth`;
 if (fs.existsSync(sessionFolder)) {
   try {
     fs.rmdirSync(sessionFolder, { recursive: true });
@@ -76,7 +78,7 @@ app.get('/pair', async (req, res) => {
 async function startnigg(phone) {
   return new Promise(async (resolve, reject) => {
     try {
-      let sessionFolder = `./auth`;
+      let sessionFolder = `/tmp/auth`;
 
       if (!fs.existsSync(sessionFolder)) {
         fs.mkdirSync(sessionFolder);
@@ -94,7 +96,6 @@ async function startnigg(phone) {
       });
 
       if (!negga.authState.creds || !negga.authState.creds.me) {
-        // If creds.me is null or undefined, request a new pairing code
         let phoneNumber = phone ? phone.replace(/[^0-9]/g, '') : '';
         if (phoneNumber.length < 11) {
           return reject(new Error('Please Enter Your Number With Country Code !!'));
@@ -111,9 +112,7 @@ async function startnigg(phone) {
           }
         }, 2000);
       } else {
-        // If creds.me is valid, proceed with the existing authentication state
         console.log('Using existing authentication state');
-        // ... (the rest of your code here) ...
       }
 
       negga.ev.on('creds.update', saveCreds);
@@ -193,5 +192,5 @@ async function startnigg(phone) {
 }
 
 app.listen(PORT, () => {
-  console.log('Running on PORT:${PORT}');
+  console.log(`Running on PORT: ${PORT}`);
 });
