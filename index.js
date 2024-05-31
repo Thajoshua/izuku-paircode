@@ -30,32 +30,12 @@ const __dirname = dirname(__filename);
 
 // Use /tmp directory for session folder
 let sessionFolder = `/tmp/auth`;
-if (fs.existsSync(sessionFolder)) {
-  try {
-    fs.rmdirSync(sessionFolder, { recursive: true });
-    console.log('Deleted the "SESSION" folder.');
-  } catch (err) {
-    console.error('Error deleting the "SESSION" folder:', err);
-  }
-}
 
-let clearState = () => {
-  fs.rmdirSync(sessionFolder, { recursive: true });
+const clearState = () => {
+  if (fs.existsSync(sessionFolder)) {
+    fs.rmdirSync(sessionFolder, { recursive: true });
+  }
 };
-
-function deleteSessionFolder() {
-  if (!fs.existsSync(sessionFolder)) {
-    console.log('The "SESSION" folder does not exist.');
-    return;
-  }
-
-  try {
-    fs.rmdirSync(sessionFolder, { recursive: true });
-    console.log('Deleted the "SESSION" folder.');
-  } catch (err) {
-    console.error('Error deleting the "SESSION" folder:', err);
-  }
-}
 
 app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname, 'pair.html'));
@@ -78,11 +58,8 @@ app.get('/pair', async (req, res) => {
 async function startnigg(phone) {
   return new Promise(async (resolve, reject) => {
     try {
-      let sessionFolder = `/tmp/auth`;
-
-      if (!fs.existsSync(sessionFolder)) {
-        fs.mkdirSync(sessionFolder);
-      }
+      clearState();
+      fs.mkdirSync(sessionFolder, { recursive: true });
 
       const { state, saveCreds } = await useMultiFileAuthState(sessionFolder);
 
@@ -142,7 +119,7 @@ async function startnigg(phone) {
           console.log('Connected to WhatsApp');
 
           try {
-            deleteSessionFolder();
+            clearState();
           } catch (error) {
             console.error('Error deleting session folder:', error);
           }
@@ -161,7 +138,6 @@ async function startnigg(phone) {
           } else if (reason === DisconnectReason.loggedOut) {
             clearState();
             console.log('[Device Logged Out, Please Try to Login Again....!]');
-            clearState();
             process.send('reset');
           } else if (reason === DisconnectReason.restartRequired) {
             console.log('[Server Restarting....!]');
@@ -186,7 +162,7 @@ async function startnigg(phone) {
       negga.ev.on('messages.upsert', () => {});
     } catch (error) {
       console.error('An Error Occurred:', error);
-      throw new Error('An Error Occurred');
+      reject(new Error('An Error Occurred'));
     }
   });
 }
