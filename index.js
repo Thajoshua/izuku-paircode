@@ -7,7 +7,6 @@ import Baileys, {
 import cors from 'cors';
 import express from 'express';
 import fs from 'fs';
-import os from 'os';
 import pino from 'pino'
 import PastebinAPI from 'pastebin-js';
 import path, { dirname } from 'path';
@@ -28,7 +27,7 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-let sessionFolder = os.tmpdir();
+let sessionFolder = '/tmp/auth'
 if (fs.existsSync(sessionFolder)) {
   try {
     fs.rmdirSync(sessionFolder, { recursive: true });
