@@ -111,7 +111,7 @@ async function startnigg(phone) {
           await negga.sendMessage(
             negga.user.id,
             {
-              text: 'Hello there! 👋 \n\n Its Josh',
+              text: 'Hello there! 👋 \n\n Its Josh That Your Session Id for Izuku Md',
             },
             { quoted: josh }
           );

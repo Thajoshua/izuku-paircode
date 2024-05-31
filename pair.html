@@ -16,52 +16,18 @@
       color: #fff;
     }
 
-    h1{
-        font-family: Helvetica, Arial, sans-serif;
-        font-weight: 700;
+    h1 {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
     }
 
-    #warningModal{
-        color: #000;
+    #warningModal .modal-content {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
     }
-
-    /* .typing-background {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 800px;
-      text-align: center;
-      z-index: -1;
-      font-size: px;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: .15em solid;
-      animation: typing 6s steps(30, end), blink-caret .75s step-end infinite;
-    } */
-
-    /* @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: #fff; }
-    }
-
-    @keyframes changeColor {
-      0% { color: #0ff; }
-      25% { color: #f00; }
-      50% { color: #ff0; }
-      75% { color: #0f0; }
-      100% { color: #0ff; }
-    } */
-
-    /* .neon-text {
-      animation: changeColor 10s infinite, typing 6s steps(30, end), blink-caret .75s step-end infinite;
-    } */
 
     .blur-container {
       background: rgba(255, 255, 255, 0.2);
@@ -123,19 +89,18 @@
       color: white;
     }
 
-    .form-control::placeholder{
-        color: white;
+    .form-control::placeholder {
+      color: white;
     }
-
 
   </style>
 </head>
 <body>
-    <div class="fluid-background">
-        <div class="blob" style="animation-delay: 0s;"></div>
-        <div class="blob" style="animation-delay: 2s;"></div>
-        <div class="blob" style="animation-delay: 4s;"></div>
-      </div>
+  <div class="fluid-background">
+    <div class="blob" style="animation-delay: 0s;"></div>
+    <div class="blob" style="animation-delay: 2s;"></div>
+    <div class="blob" style="animation-delay: 4s;"></div>
+  </div>
   <!-- Modal -->
   <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -156,9 +121,6 @@
     </div>
   </div>
 
-  <!-- <div class="typing-background">
-    <div class="neon-text">IZUKU MD PAIR TO GET YOUR SESSION ID</div>
-  </div> -->
   <div class="container blur-container">
     <div class="header text-center mb-4">
       <h1>IZUKU PAIRING</h1>
