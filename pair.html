@@ -1,109 +1,297 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>IZUKU PAIR</title>
- <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
+  <title>IZUKU PAIR</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin: 0;
+      background: #000;
+      color: #fff;
+    }
+
+    h1{
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 700;
+    }
+
+    #warningModal{
+        color: #000;
+    }
+
+    /* .typing-background {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+      z-index: -1;
+      font-size: px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid;
+      animation: typing 6s steps(30, end), blink-caret .75s step-end infinite;
+    } */
+
+    /* @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #fff; }
+    }
+
+    @keyframes changeColor {
+      0% { color: #0ff; }
+      25% { color: #f00; }
+      50% { color: #ff0; }
+      75% { color: #0f0; }
+      100% { color: #0ff; }
+    } */
+
+    /* .neon-text {
+      animation: changeColor 10s infinite, typing 6s steps(30, end), blink-caret .75s step-end infinite;
+    } */
+
+    .blur-container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      max-width: 400px;
+      width: 100%;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .fluid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: #0552a6;
+      border-radius: 50%;
+      filter: blur(150px);
+      animation: move 15s infinite alternate;
+    }
+
+    @keyframes move {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(200px, 200px); }
+    }
+
+    .input-group-text, .form-control {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #000;
+    }
+
+    .input-group-text {
+      border-right: 0;
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: none;
+      color: white;
+    }
+
+    .form-control::placeholder{
+        color: white;
+    }
+
+
+  </style>
 </head>
 <body>
- <div class="container">
-  <div class="header">
-   <h1>PAIRING</h1>
+    <div class="fluid-background">
+        <div class="blob" style="animation-delay: 0s;"></div>
+        <div class="blob" style="animation-delay: 2s;"></div>
+        <div class="blob" style="animation-delay: 4s;"></div>
+      </div>
+  <!-- Modal -->
+  <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="warningModalLabel">Warning</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          We are not able to access anyone's session ID and you should be careful of who you give your session ID to.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="main">
-   <form>
-    <span>
-     <i class="fa fa-user"></i>
-     <input type="number" id="number" placeholder="enter your phone number with country code" name="">
-    </span><br>
-     <button id="submit">submit</button>
-<main id="pair"></main>
-   </form>
+
+  <!-- <div class="typing-background">
+    <div class="neon-text">IZUKU MD PAIR TO GET YOUR SESSION ID</div>
+  </div> -->
+  <div class="container blur-container">
+    <div class="header text-center mb-4">
+      <h1>IZUKU PAIRING</h1>
+    </div>
+    <div class="main">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+            </div>
+            <input type="number" id="number" class="form-control" placeholder="Enter your phone number with country code">
+          </div>
+        </div>
+        <button id="submit" class="btn btn-primary btn-block">Submit</button>
+        <main id="pair" class="mt-4"></main>
+      </form>
+    </div>
   </div>
- </div>
- <link rel="import" href="./loader.html">
- <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
-    ></script>
-    <script>
-      let a = document.getElementById("pair");
-      let b = document.getElementById("submit");
-      let c = document.getElementById("number");
-  
-      let isSubmitting = false;
-      let isCodeDisplayed = false;
-  
-      async function Copy() {
-        let text = document.getElementById("copy").innerText;
-        let obj = document.getElementById("copy");
-        await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
-        obj.innerText = "COPIED";
-        obj.style = "color:blue;font-weight:bold";
-        obj.size = "5";
-        setTimeout(() => {
-          obj.innerText = text;
-          obj.style = "color:black;font-weight-bold";
-          obj.size = "5";
-        }, 500);
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#warningModal').modal('show');
+    });
+
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+
+    let isSubmitting = false;
+    let isCodeDisplayed = false;
+
+    async function Copy() {
+      let text = document.getElementById("copy").innerText;
+      let obj = document.getElementById("copy");
+      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
+      obj.innerText = "COPIED";
+      obj.style = "color:blue;font-weight:bold";
+      setTimeout(() => {
+        obj.innerText = text;
+        obj.style = "color:black;font-weight:bold";
+      }, 500);
+    }
+
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      if (isCodeDisplayed) {
+        alert("Please wait for 2 minutes before requesting a new code.");
+        return;
       }
-  
-      b.addEventListener("click", async (e) => {
-        e.preventDefault();
-  
-        if (isCodeDisplayed) {
-          alert("Please wait for 2 minutes before requesting a new code.");
-          return;
-        }
-  
-        if (isSubmitting) {
-          alert("Please wait for the code before trying to request again.");
-          return;
-        }
-  
-        if (!c.value) {
-          a.innerHTML = '<a style="color:black;font-weight:bold">Enter your WhatsApp number with a country code</a><br><br>';
-        } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
-          a.innerHTML = '<a style="color:black;font-weight:bold">Invalid number format</a><br><br>';
-        } else {
-          isSubmitting = true;
-  
-          const bc = c.value.replace(/[^0-9]/g, "");
-          let bb = "";
-          let bbc = "";
-          const cc = bc.split('');
-          cc.map(a => {
-            bbc += a;
-            if (bbc.length == 3) {
-              bb += " " + a;
-            } else if (bbc.length == 8) {
-              bb += " " + a;
-            } else {
-              bb += a;
-            }
-          });
-  
-          c.type = "text";
-          c.value = "+" + bb;
-          c.style = "color:black;font-size:20px";
-          a.innerHTML = '<a style="color:black;font-weight:bold">Please wait for some time</a><br><br>';
-  
-          try {
-            let {
-              data
-            } = await axios(`/pair?phone=${bc}`);
-            let code = data.code || "Service Unavailable";
-            a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:black;font-weight:bold">' + code + '</span></font><br><br><br>';
-            isCodeDisplayed = true;
-  
-            setTimeout(() => {
-              isCodeDisplayed = false;
-            }, 120000); 
-          } catch (error) {
-            
-          } finally {
-            isSubmitting = false;
+
+      if (isSubmitting) {
+        alert("Please wait for the code before trying to request again.");
+        return;
+      }
+
+      if (!c.value) {
+        a.innerHTML = '<div class="alert alert-warning">Enter your WhatsApp number with a country code</div>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
+        a.innerHTML = '<div class="alert alert-danger">Invalid number format</div>';
+      } else {
+        isSubmitting = true;
+
+        const bc = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = bc.split('');
+        cc.map(a => {
+          bbc += a;
+          if (bbc.length == 3) {
+            bb += " " + a;
+          } else if (bbc.length == 8) {
+            bb += " " + a;
+          } else {
+            bb += a;
           }
+        });
+
+        c.type = "text";
+        c.value = "+" + bb;
+        c.style = "color:black;font-size:20px";
+        a.innerHTML = '<div class="alert alert-info">Please wait for some time</div>';
+
+        try {
+          let { data } = await axios(`/pair?phone=${bc}`);
+          let code = data.code || "Service Unavailable";
+          a.innerHTML = '<div class="alert alert-success"><span id="copy" onclick="Copy()" style="cursor:pointer;color:red;font-weight:bold">CODE: <span style="color:black;font-weight:bold">' + code + '</span></span></div>';
+          isCodeDisplayed = true;
+
+          setTimeout(() => {
+            isCodeDisplayed = false;
+          }, 120000);
+        } catch (error) {
+          a.innerHTML = '<div class="alert alert-danger">Error retrieving code. Please try again later.</div>';
+        } finally {
+          isSubmitting = false;
         }
-      });
-    </script>
+      }
+    });
+
+    // Typing effect for neon text
+    // const textElement = document.querySelector('.neon-text');
+    // const text = "IZUKU MD PAIR TO GET YOUR SESSION ID";
+    // let index = 0;
+
+    // function type() {
+    //   if (index < text.length) {
+    //     textElement.innerHTML += text.charAt(index);
+    //     index++;
+    //     setTimeout(type, 100);
+    //   } else {
+    //     setTimeout(erase, 2000);
+    //   }
+    // }
+
+    // function erase() {
+    //   if (index > 0) {
+    //     textElement.innerHTML = text.substring(0, index - 1);
+    //     index--;
+    //     setTimeout(erase, 50);
+    //   } else {
+    //     setTimeout(type, 2000);
+    //   }
+    // }
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   setTimeout(type, 1000);
+    // });
+  </script>
 </body>
-  </html>
+</html>iejpe
