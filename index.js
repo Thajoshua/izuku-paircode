@@ -27,7 +27,7 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-
+let sessionFolder = `./auth`
 if (fs.existsSync(sessionFolder)) {
   try {
     fs.rmdirSync(sessionFolder, { recursive: true });
@@ -76,6 +76,8 @@ app.get('/pair', async (req, res) => {
 async function startnigg(phone) {
   return new Promise(async (resolve, reject) => {
     try {
+      let sessionFolder = `./auth`;
+
       if (!fs.existsSync(sessionFolder)) {
         fs.mkdirSync(sessionFolder);
       }
@@ -91,7 +93,8 @@ async function startnigg(phone) {
         auth: state,
       });
 
-      if (!negga.authState.creds.registered) {
+      if (!negga.authState.creds || !negga.authState.creds.me) {
+        // If creds.me is null or undefined, request a new pairing code
         let phoneNumber = phone ? phone.replace(/[^0-9]/g, '') : '';
         if (phoneNumber.length < 11) {
           return reject(new Error('Please Enter Your Number With Country Code !!'));
@@ -99,7 +102,7 @@ async function startnigg(phone) {
         setTimeout(async () => {
           try {
             let code = await negga.requestPairingCode(phoneNumber);
-            console.log(`Your Pairing Code : ${code}`)
+            console.log(`Your Pairing Code : ${code}`);
             resolve(code);
           } catch (requestPairingCodeError) {
             const errorMessage = 'Error requesting pairing code from WhatsApp';
@@ -107,6 +110,10 @@ async function startnigg(phone) {
             return reject(new Error(errorMessage));
           }
         }, 2000);
+      } else {
+        // If creds.me is valid, proceed with the existing authentication state
+        console.log('Using existing authentication state');
+        // ... (the rest of your code here) ...
       }
 
       negga.ev.on('creds.update', saveCreds);
