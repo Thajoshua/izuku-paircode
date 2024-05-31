@@ -27,11 +27,9 @@ let PORT = process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-let sessionFolder = `./auth`
+let sessionFolder = `./auth`;
 
-// Check if the directory exists
 if (!fs.existsSync(sessionFolder)) {
-  // If it doesn't exist, create it
   try {
     fs.mkdirSync(sessionFolder);
     console.log(`Created the "${sessionFolder}" folder.`);
@@ -41,7 +39,7 @@ if (!fs.existsSync(sessionFolder)) {
   }
 } else {
   console.log(`The "${sessionFolder}" folder already exists.`);
-} 
+}
 
 let clearState = () => {
   fs.rmdirSync(sessionFolder, { recursive: true });
