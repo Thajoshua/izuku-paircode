@@ -21,6 +21,7 @@
     h1 {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
+      font-size: 2rem;
     }
 
     #warningModal .modal-content {
@@ -39,8 +40,9 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      max-width: 400px;
+      max-width: 100%;
       width: 100%;
+      margin: 20px;
     }
 
     .fluid-background {
@@ -92,10 +94,23 @@
     @media (max-width: 768px) {
       body {
         padding: 20px;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 1.5rem;
       }
 
       .blur-container {
-        max-width: 100%;
+        padding: 15px;
+      }
+
+      .input-group-text, .form-control {
+        font-size: 0.875rem;
+      }
+
+      .btn {
+        font-size: 0.875rem;
       }
     }
   </style>
@@ -118,7 +133,7 @@
           </button>
         </div>
         <div class="modal-body">
-          We are not able to access anyone's session ID and you should be careful of who you give your session ID to.
+          We are not able to accessbkjjkcbk anyone's session ID and you should be careful of who you give your session ID to.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
