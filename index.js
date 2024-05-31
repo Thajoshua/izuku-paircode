@@ -94,6 +94,7 @@ async function startnigg(phone) {
         browser: ['Ubuntu', 'Chrome', '20.0.04'],
         auth: state,
       });
+      
 
       if (!negga.authState.creds.registered) {
         let phoneNumber = phone ? phone.replace(/[^0-9]/g, '') : '';
